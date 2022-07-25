@@ -84,6 +84,7 @@ namespace ProductInvoice.Controllers
             if (searchTerm != null)
             {
                 IEnumerable<Product> products = _productRepository.Search(searchTerm);
+                ViewBag.InvoiceId = invoiceId.ToString();
                 return View("AddInvoice", products);
             }
             else

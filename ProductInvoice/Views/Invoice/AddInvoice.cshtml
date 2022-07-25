@@ -8,10 +8,6 @@
     
 }
 
-<h1>Invoice</h1>
-<br />
-<br />
-
 <div class="row">
     <div class="col-6 offset-1">
        <label><b>Invoice Id: </b></label><input type="text" 
@@ -25,9 +21,10 @@
     </form>
     </div>
     </div>
+    <br />
 <div class="row">
     <div class="col-2 offset-1">
-        <p>@ViewBag.totPrice</p>
+        <label><b>Total Cost</b></label>: @ViewBag.totPrice
     </div>
 </div>
 <br />
@@ -50,9 +47,13 @@
                 <p>Savings</p>
             </th>
             <th>
+                <p>No. Of Items</p>
+            </th>
+            <th>
                 <p>Final Price</p>
                 
             </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -70,7 +71,7 @@
                         }
                     }
                     
-                                @Html.DisplayFor(modelItem => max)
+                                @Html.DisplayFor(modelItem => max)<text>%</text>
                   }
             </td>
             <td>
@@ -88,6 +89,17 @@
                     }
                     <p>@disPrice</p>
             </td>
+            <td>
+                    @foreach(var it in item.invoiceItems)
+                    {
+                        @if(it.ProductId.CompareTo(item.ProductId) == 0 
+                        && it.InvoiceId.ToString().Equals(@ViewBag.InvoiceId))
+                        {
+                            
+                            @Html.DisplayFor(ite=>it.NoOfItems)
+                        }
+                    } 
+                </td>
             <td>
                     @{
                         decimal total = item.ProductBasePrice - disPrice;
@@ -107,9 +119,13 @@
         }
     </tbody>
 </table>
-<div class="col-4 offset-4" >
-    <a asp-action="Index" class="btn btn-success">Save</a>
+<br />
+<div class="row">
+<div class="col-2 offset-4" >
 
+    <a asp-action="Index" class="btn btn-success">Save</a>
+    </div>
+    <div class="col-2">
        <form asp-action="Cancel">
            
                 <button type="submit" class="btn btn-danger">Cancel
@@ -117,5 +133,5 @@
                     
                 </form>
 </div>
+</div>
                 
- 

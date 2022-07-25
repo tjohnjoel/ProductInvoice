@@ -36,7 +36,7 @@ namespace ProductInvoice.Services
 
         public IEnumerable<Product> products()
         {
-           return _context.Products.Include(p => p.discounts);
+           return _context.Products.Include(p => p.discounts).Include(p=>p.invoiceItems);
         }
 
         public IEnumerable<Product> Search(string searchTerm)
@@ -47,8 +47,9 @@ namespace ProductInvoice.Services
             List<Product> products = new List<Product>();
             foreach( Product item in pro)
             {
-                Product pr = _context.Products.Include(pr=>pr.discounts).
-                    Where(prr=> prr.ProductId.CompareTo(item.ProductId) == 0).FirstOrDefault();
+                Product pr = _context.Products.Include(pr => pr.discounts).
+                    Where(prr => prr.ProductId.CompareTo(item.ProductId) == 0).
+                    Include(ii => ii.invoiceItems).FirstOrDefault();
 
                 products.Add(pr);
             }
