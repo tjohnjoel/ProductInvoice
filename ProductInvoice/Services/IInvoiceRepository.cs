@@ -9,5 +9,6 @@ namespace ProductInvoice.Services
         Invoice GetInvoiceById(Guid invoiceId);
         void Cancel(Guid invoiceId);
         decimal UpdatePrice(Product product, Guid invoicId);
+        decimal SubtractPrice(Product product, Guid invoicId);
     }
 }

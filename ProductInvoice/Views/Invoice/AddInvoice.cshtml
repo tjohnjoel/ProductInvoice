@@ -44,10 +44,10 @@
                 @Html.DisplayNameFor(model => model.ProductBasePrice)
             </th>
             <th>
-                <p>Savings</p>
+                <p>No. Of Items</p>
             </th>
             <th>
-                <p>No. Of Items</p>
+                <p>Savings</p>
             </th>
             <th>
                 <p>Final Price</p>
@@ -62,16 +62,16 @@
         <tr>
             <td>
                 @{decimal max =0,disPrice;
-                        @foreach(var ite in item.discounts)
+                                    @foreach(var ite in item.discounts)
                     {
-                                @if(ite.DiscountExpiration > DateTime.Now)
+                                            @if(ite.DiscountExpiration > DateTime.Now)
                         {
-                                    @if (ite.DiscountPercent > max)
+                                                @if (ite.DiscountPercent > max)
                                     max = ite.DiscountPercent;
                         }
                     }
                     
-                                @Html.DisplayFor(modelItem => max)<text>%</text>
+                                            @Html.DisplayFor(modelItem => max)<text>%</text>
                   }
             </td>
             <td>
@@ -84,21 +84,23 @@
                 @Html.DisplayFor(modelItem => item.ProductBasePrice)
             </td>
             <td>
-                    @{
-                        disPrice = item.ProductBasePrice * max/100;
-                    }
-                    <p>@disPrice</p>
-            </td>
-            <td>
-                    @foreach(var it in item.invoiceItems)
+            
+                @foreach(var it in item.invoiceItems)
                     {
                         @if(it.ProductId.CompareTo(item.ProductId) == 0 
                         && it.InvoiceId.ToString().Equals(@ViewBag.InvoiceId))
                         {
-                            
-                            @Html.DisplayFor(ite=>it.NoOfItems)
+                                @Html.DisplayFor(ite=>it.NoOfItems)
                         }
                     } 
+                   
+            </td>
+            <td>
+                    @{
+                        disPrice = item.ProductBasePrice * max/100;
+                        
+                    }
+                    <p>@disPrice</p>
                 </td>
             <td>
                     @{
@@ -108,12 +110,19 @@
             <p>@total</p>
             </td>
             <td>
-                
-            <form asp-action="AddItems" asp-route-ProductId="@item.ProductId" >
+                <div class="row">
+                <div class="btn-group btn-group-sm">
+                <form asp-action="AddItems" asp-route-ProductId="@item.ProductId" >
                 <button type="submit" class="btn btn-success">Add
                     </button>
-                    
                 </form>
+                <p></p>
+                <form asp-action="RemoveItems" asp-route-ProductId="@item.ProductId" >
+                <button type="submit" class="btn btn-warning">Remove
+                    </button>
+                </form>
+                 </div>
+                </div>
             </td>
         </tr>
         }

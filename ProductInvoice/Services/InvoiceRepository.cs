@@ -57,5 +57,30 @@ namespace ProductInvoice.Services
             _appDbContext.SaveChanges();
             return invoice.TotalPrice;
         }
+
+        public decimal SubtractPrice(Product product, Guid invoiceId)
+        {
+            decimal Cost = product.ProductBasePrice;
+            Discount discount = _appDbContext.Discounts.FirstOrDefault(i => i.ProductId == product.ProductId);
+
+            Invoice invoice = GetInvoiceById(invoiceId);
+            if (discount != null)
+            {
+                decimal disCostPerc = discount.DiscountPercent;
+                decimal savings = Cost * disCostPerc / 100;
+
+                Cost = Cost - savings;
+
+                invoice.TotalPrice = invoice.TotalPrice-Cost;
+            }
+            else
+            {
+                invoice.TotalPrice = invoice.TotalPrice - Cost;
+            }
+
+
+            _appDbContext.SaveChanges();
+            return invoice.TotalPrice;
+        }
     }
 }

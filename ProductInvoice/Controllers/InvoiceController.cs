@@ -64,9 +64,17 @@ namespace ProductInvoice.Controllers
             return RedirectToAction("AddInvoice");
         }
         [HttpPost]
-        public IActionResult RemoveItems(InvoiceItems items)
+        public IActionResult RemoveItems(Guid productId)
         {
-            return Ok();
+            Product product = _productRepository.GetProductById(productId);
+
+            Guid InvoiceId = invoiceId;
+            _invoiceItemsRepository.RemoveItems(InvoiceId, product);
+
+            decimal total = _invoiceRepository.SubtractPrice(product, invoiceId);
+            totalPrice = total;
+
+            return RedirectToAction("AddInvoice");
         }
 
         [HttpPost]

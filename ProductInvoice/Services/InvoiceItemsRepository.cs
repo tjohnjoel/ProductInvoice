@@ -42,5 +42,24 @@ namespace ProductInvoice.Services
                 _appDbContext.SaveChanges();
             }
         }
+
+        public void RemoveItems(Guid invoiceId, Product product)
+        {
+            InvoiceItems invoiceItems = _appDbContext.InvoiceItems.Where(i => i.ProductId == product.ProductId
+            && i.InvoiceId == invoiceId).FirstOrDefault();
+            if (invoiceItems == null)
+            {
+                return;
+            }
+            if(invoiceItems.NoOfItems > 1)
+            {
+                invoiceItems.NoOfItems = --invoiceItems.NoOfItems;
+            }
+            else
+            {
+                _appDbContext.InvoiceItems.Remove(invoiceItems);
+            }
+            _appDbContext.SaveChanges();
+        }
     }
 }
