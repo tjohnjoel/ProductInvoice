@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProductInvoice.Models.Discount>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddDiscount" class="btn btn-sm btn-success">Add a New Discount</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountPercent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountExpiration)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPercent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountExpiration)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ProductInvoice.Models.Product>
+@using ProductInvoice.Models
+
+
+@{
+    ViewData["Title"] = "AddInvoice";
+    <br />
+    
+}
+
+<h1>Invoice</h1>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-6 offset-1">
+       <label><b>Invoice Id: </b></label><input type="text" 
+           value= "@ViewBag.InvoiceId" class="forrm-control" style="width: 310px" readonly/>
+    </div>
+    <div class="col-2 offset-1">
+        <p>@ViewBag.totPrice</p>
+    </div>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.discounts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductBasePrice)
+            </th>
+            <th>
+                <p>Savings</p>
+            </th>
+            <th>
+                <p>Final Price</p>
+                
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @{decimal max =0,disPrice;
+                        @foreach(var ite in item.discounts)
+                    {
+                                @if(ite.DiscountExpiration > DateTime.Now)
+                        {
+                                    @if (ite.DiscountPercent > max)
+                                    max = ite.DiscountPercent;
+                        }
+                    }
+                    
+                                @Html.DisplayFor(modelItem => max)
+                  }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductBasePrice)
+            </td>
+            <td>
+                    @{
+                        disPrice = item.ProductBasePrice * max/100;
+                    }
+                    <p>@disPrice</p>
+            </td>
+            <td>
+                    @{
+                        decimal total = item.ProductBasePrice - disPrice;
+                        ViewData["Price"] = total;
+                    }
+            <p>@total</p>
+            </td>
+            <td>
+                
+            <form asp-action="AddItems" asp-route-ProductId="@item.ProductId" >
+                <button type="submit" class="btn btn-success">Add
+                    </button>
+                    
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+       <form asp-action="Cancel">
+                <button type="submit" class="btn btn-danger">Add
+                    </button>
+                    
+                </form>
+                
+ 
