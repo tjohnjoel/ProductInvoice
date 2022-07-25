@@ -39,14 +39,20 @@ namespace ProductInvoice.Services
         {
             decimal Cost = product.ProductBasePrice;
             Discount discount = _appDbContext.Discounts.FirstOrDefault(i => i.ProductId == product.ProductId);
-            decimal disCostPerc = 1;
+            
+            Invoice invoice = GetInvoiceById(invoicId);
             if (discount != null)
             {
-                disCostPerc = discount.DiscountPercent;
+                decimal disCostPerc = discount.DiscountPercent;
+                decimal savings = Cost * disCostPerc / 100;
+                
+                invoice.TotalPrice = invoice.TotalPrice + Cost - savings;
             }
-            decimal savings = Cost * disCostPerc / 100;
-            Invoice invoice = GetInvoiceById(invoicId);
-            invoice.TotalPrice=invoice.TotalPrice+ Cost - savings;
+            else
+            {
+                invoice.TotalPrice = invoice.TotalPrice + Cost;
+            }
+            
 
             _appDbContext.SaveChanges();
             return invoice.TotalPrice;

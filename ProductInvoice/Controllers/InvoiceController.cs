@@ -43,7 +43,7 @@ namespace ProductInvoice.Controllers
                 if (invoiceId == Guid.Empty)
                 {
                     invoiceId = Guid.NewGuid();
-
+                totalPrice= 0;
                     _invoiceRepository.AddInvoice(invoiceId);
                 }
             ViewBag.InvoiceId = invoiceId.ToString();
@@ -75,6 +75,7 @@ namespace ProductInvoice.Controllers
             _invoiceRepository.Cancel(invoiceId);
             _invoiceItemsRepository.RemoveItems(invoiceId);
             invoiceId = Guid.Empty;
+            totalPrice = 0;
             return RedirectToAction("Index");
         }
 

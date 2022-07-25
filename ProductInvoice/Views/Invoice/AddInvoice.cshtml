@@ -17,6 +17,14 @@
        <label><b>Invoice Id: </b></label><input type="text" 
            value= "@ViewBag.InvoiceId" class="forrm-control" style="width: 310px" readonly/>
     </div>
+
+     <div class="col-5">
+
+         <label><b>Search</b></label>
+
+    </div>
+    </div>
+<div class="row">
     <div class="col-2 offset-1">
         <p>@ViewBag.totPrice</p>
     </div>
@@ -98,10 +106,15 @@
         }
     </tbody>
 </table>
+<div class="col-4 offset-4" >
+    <a asp-action="Index" class="btn btn-success">Save</a>
+
        <form asp-action="Cancel">
-                <button type="submit" class="btn btn-danger">Add
+           
+                <button type="submit" class="btn btn-danger">Cancel
                     </button>
                     
                 </form>
+</div>
                 
  
