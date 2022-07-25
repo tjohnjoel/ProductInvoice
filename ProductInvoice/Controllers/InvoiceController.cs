@@ -43,7 +43,7 @@ namespace ProductInvoice.Controllers
                 if (invoiceId == Guid.Empty)
                 {
                     invoiceId = Guid.NewGuid();
-                totalPrice= 0;
+                    totalPrice= 0;
                     _invoiceRepository.AddInvoice(invoiceId);
                 }
             ViewBag.InvoiceId = invoiceId.ToString();
@@ -79,7 +79,18 @@ namespace ProductInvoice.Controllers
             return RedirectToAction("Index");
         }
 
-
+        public IActionResult Search(string searchTerm)
+        {
+            if (searchTerm != null)
+            {
+                IEnumerable<Product> products = _productRepository.Search(searchTerm);
+                return View("AddInvoice", products);
+            }
+            else
+            {
+                return RedirectToAction("AddInvoice");
+            }
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

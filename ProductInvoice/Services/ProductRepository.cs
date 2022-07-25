@@ -39,6 +39,22 @@ namespace ProductInvoice.Services
            return _context.Products.Include(p => p.discounts);
         }
 
+        public IEnumerable<Product> Search(string searchTerm)
+        {
+            IEnumerable<Product> pro = from pr in _context.Products
+                                            where pr.ProductName.Contains($"{searchTerm}") 
+                                            select pr;
+            List<Product> products = new List<Product>();
+            foreach( Product item in pro)
+            {
+                Product pr = _context.Products.Include(pr=>pr.discounts).
+                    Where(prr=> prr.ProductId.CompareTo(item.ProductId) == 0).FirstOrDefault();
+
+                products.Add(pr);
+            }
+            return products;
+        }
+
         public void UpdateProduct(Guid ProductId, Product product)
         {
            

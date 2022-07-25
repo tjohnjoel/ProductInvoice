@@ -9,5 +9,6 @@ namespace ProductInvoice.Services
         void AddProduct(Product product);
         Product GetProductById(Guid ProductId);
         void DeleteProduct(Guid ProductId);
+        IEnumerable<Product> Search(string searchTerm);
     }
 }
