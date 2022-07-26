@@ -13,7 +13,7 @@
        <label><b>Invoice Id: </b></label><input type="text" 
            value= "@ViewBag.InvoiceId" class="forrm-control" style="width: 310px" readonly/>
     </div>
-
+    
      <div class="col-5">
          <form method="get" asp-action="Search" >
          <input type="text" name="searchTerm" id="searchTerm" />
@@ -132,7 +132,7 @@
 <div class="row">
 <div class="col-2 offset-4" >
 
-    <a asp-action="Index" class="btn btn-success">Save</a>
+    <a asp-action="Save" class="btn btn-success">Save</a>
     </div>
     <div class="col-2">
        <form asp-action="Cancel">

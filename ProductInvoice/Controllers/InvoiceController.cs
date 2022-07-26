@@ -14,8 +14,7 @@ namespace ProductInvoice.Controllers
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IProductRepository _productRepository;
         private readonly IInvoiceItemsRepository _invoiceItemsRepository;
-        public static Guid invoiceId { get; set; }
-        public static decimal totalPrice { get; set; }
+        
         
         public InvoiceController(IProductRepository productRepository,IInvoiceRepository invoiceRepository
             ,ILogger<InvoiceController> logger,IInvoiceItemsRepository invoiceItemsRepository)
@@ -39,15 +38,25 @@ namespace ProductInvoice.Controllers
         [HttpGet]
         public IActionResult AddInvoice()
         {
-            
-                if (invoiceId == Guid.Empty)
+            Guid i;
+            if (HttpContext.Session.GetString("InvoiceId") == null)
+                HttpContext.Session.SetString("InvoiceId", "null");
+
+            if(HttpContext.Session.GetString("InvoiceId").Equals("null") == true)
                 {
-                    invoiceId = Guid.NewGuid();
-                    totalPrice= 0;
-                    _invoiceRepository.AddInvoice(invoiceId);
+                    //invoiceId = Guid.NewGuid();
+                    HttpContext.Session.SetString("InvoiceId",Guid.NewGuid().ToString());
+                i = new Guid(HttpContext.Session.GetString("InvoiceId"));
+                    HttpContext.Session.SetString("TotalPrice","0");
+                    _invoiceRepository.AddInvoice(i);
                 }
-            ViewBag.InvoiceId = invoiceId.ToString();
-            ViewBag.totPrice = totalPrice;
+            i = new Guid(HttpContext.Session.GetString("InvoiceId"));
+
+            ViewBag.InvoiceId = i.ToString();
+            
+            
+            
+            ViewBag.totPrice = HttpContext.Session.GetString("TotalPrice");
             IEnumerable<Product> products = _productRepository.products();
             return View(products);
         }
@@ -56,11 +65,11 @@ namespace ProductInvoice.Controllers
         {
             Product product = _productRepository.GetProductById(productId);
 
-            Guid InvoiceId = invoiceId;
+            Guid InvoiceId = new Guid(HttpContext.Session.GetString("InvoiceId"));
              _invoiceItemsRepository.AddItems(InvoiceId, product);
             
-           decimal total = _invoiceRepository.UpdatePrice(product, invoiceId);
-            totalPrice = total;
+           decimal total = _invoiceRepository.UpdatePrice(product, InvoiceId);
+             HttpContext.Session.SetString("TotalPrice", total.ToString());
             return RedirectToAction("AddInvoice");
         }
         [HttpPost]
@@ -68,11 +77,11 @@ namespace ProductInvoice.Controllers
         {
             Product product = _productRepository.GetProductById(productId);
 
-            Guid InvoiceId = invoiceId;
+            Guid InvoiceId = new Guid(HttpContext.Session.GetString("InvoiceId"));
             _invoiceItemsRepository.RemoveItems(InvoiceId, product);
 
-            decimal total = _invoiceRepository.SubtractPrice(product, invoiceId);
-            totalPrice = total;
+            decimal total = _invoiceRepository.SubtractPrice(product, InvoiceId);
+            HttpContext.Session.SetString("TotalPrice", total.ToString());
 
             return RedirectToAction("AddInvoice");
         }
@@ -80,15 +89,23 @@ namespace ProductInvoice.Controllers
         [HttpPost]
         public IActionResult Cancel()
         {
+            Guid invoiceId = new Guid(HttpContext.Session.GetString("InvoiceId"));
             _invoiceRepository.Cancel(invoiceId);
             _invoiceItemsRepository.RemoveItems(invoiceId);
-            invoiceId = Guid.Empty;
-            totalPrice = 0;
+            HttpContext.Session.SetString("InvoiceId","null");
+            HttpContext.Session.SetString("TotalPrice","0");
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Save()
+        {
+            HttpContext.Session.SetString("InvoiceId", "null");
             return RedirectToAction("Index");
         }
 
         public IActionResult Search(string searchTerm)
         {
+            Guid invoiceId = new Guid(HttpContext.Session.GetString("InvoiceId"));
             if (searchTerm != null)
             {
                 IEnumerable<Product> products = _productRepository.Search(searchTerm);
