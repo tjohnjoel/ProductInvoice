@@ -11,13 +11,13 @@
 <div class="row">
     <div class="col-6 offset-1">
        <label><b>Invoice Id: </b></label><input type="text" 
-           value= "@ViewBag.InvoiceId" class="forrm-control" style="width: 310px" readonly/>
+           value= "@ViewBag.InvoiceId" class="form-control" style="width: 310px" readonly/>
     </div>
     
      <div class="col-5">
          <form method="get" asp-action="Search" >
          <input type="text" name="searchTerm" id="searchTerm" />
-        <button type="submit" class="btn btn-success">Search</button>
+        <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     </div>
     </div>
@@ -113,12 +113,12 @@
                 <div class="row">
                 <div class="btn-group btn-group-sm">
                 <form asp-action="AddItems" asp-route-ProductId="@item.ProductId" >
-                <button type="submit" class="btn btn-success">Add
+                <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-circle-plus"></i>
                     </button>
                 </form>
                 <p></p>
                 <form asp-action="RemoveItems" asp-route-ProductId="@item.ProductId" >
-                <button type="submit" class="btn btn-warning">Remove
+                <button type="submit" class="btn btn-outline-warning"><i class="fa-solid fa-minus"></i>
                     </button>
                 </form>
                  </div>

@@ -7,10 +7,11 @@
 <h1>Index</h1>
 <div class="row">
     <div class="col-md-2" >
-    <a asp-action="AddProduct" class="btn btn-sm btn-primary">Add a New Product</a>
+    <a asp-action="AddProduct" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add Product</a>
     </div>
 <div class="col-md-2 offset-8">
-    <a asp-controller="Discount" asp-action="AddDiscount" class="btn btn-sm btn-success">Add a New Discount</a>
+    <a asp-controller="Discount" asp-action="AddDiscount" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-plus"></i>
+         Add a New Discount</a>
     </div>
 </div>
 <br />
@@ -69,12 +70,12 @@
             <td>
                 <form asp-action="DeleteProduct" asp-route-ProductId="@item.ProductId">
                 <div class="btn-group btn-group-sm">      
-                    <a asp-action="UpdateProduct" asp-route-ProductId="@item.ProductId" class="btn btn-outline-warning" >Edit</a>
+                    <a asp-action="UpdateProduct" asp-route-ProductId="@item.ProductId" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
                 
-                <a asp-action="GetProductById" asp-route-ProductId="@item.ProductId" class="btn btn-outline-info">Details</a>
+                <a asp-action="GetProductById" asp-route-ProductId="@item.ProductId" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a>
                 
-                    <button type="submit" class="btn btn-outline-danger"
-                    onclick="return confirm('Are you sure?')">Delete
+                    <button type="submit" class="btn btn-danger"
+                    onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i>
                     </button>
                     
                     </div>
