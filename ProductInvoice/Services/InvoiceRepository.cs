@@ -64,6 +64,12 @@ namespace ProductInvoice.Services
             Discount discount = _appDbContext.Discounts.FirstOrDefault(i => i.ProductId == product.ProductId);
 
             Invoice invoice = GetInvoiceById(invoiceId);
+            InvoiceItems invoiceItems = _appDbContext.InvoiceItems.Where(i => i.ProductId == product.ProductId
+            && i.InvoiceId == invoiceId).FirstOrDefault();
+            if (invoiceItems == null)
+            {
+                return 0;
+            }
             if (discount != null)
             {
                 decimal disCostPerc = discount.DiscountPercent;
