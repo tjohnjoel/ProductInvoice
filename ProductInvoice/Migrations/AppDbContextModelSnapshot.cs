@@ -32,6 +32,7 @@ namespace ProductInvoice.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DiscountExpiration")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DiscountPercent")
@@ -122,48 +123,48 @@ namespace ProductInvoice.Migrations
                     b.HasData(
                         new
                         {
-                            ProductId = new Guid("75373a09-95d7-4e03-b489-7f99a81ed3b8"),
+                            ProductId = new Guid("352e8789-e944-496c-8d6d-67da0b3fc2be"),
                             ProductBasePrice = 9999m,
                             ProductCategory = "Mobiles",
-                            ProductCreated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7659),
+                            ProductCreated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6175),
                             ProductName = "Novice",
-                            ProductUpdated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7669)
+                            ProductUpdated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6191)
                         },
                         new
                         {
-                            ProductId = new Guid("333ae2c4-50c2-4f44-8499-35e06bce0c7e"),
+                            ProductId = new Guid("53249ff4-b284-4202-843a-e3cb05688923"),
                             ProductBasePrice = 49999m,
                             ProductCategory = "Television",
-                            ProductCreated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7671),
+                            ProductCreated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6196),
                             ProductName = "Stans Pro",
-                            ProductUpdated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7671)
+                            ProductUpdated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6196)
                         },
                         new
                         {
-                            ProductId = new Guid("c28a8af3-b1a2-4d87-83fd-64c36153d0bd"),
+                            ProductId = new Guid("dcfe7f16-1125-4805-b756-7b7114cc6cf6"),
                             ProductBasePrice = 19999m,
                             ProductCategory = "Washing Machine",
-                            ProductCreated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7673),
+                            ProductCreated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6227),
                             ProductName = "Ultra Washing",
-                            ProductUpdated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7673)
+                            ProductUpdated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6228)
                         },
                         new
                         {
-                            ProductId = new Guid("e1ac9917-d9fe-4aea-a43e-5680580665da"),
+                            ProductId = new Guid("6c5c6945-6376-4e38-be16-80ff85341ffa"),
                             ProductBasePrice = 59999m,
                             ProductCategory = "Air Conditioner",
-                            ProductCreated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7674),
+                            ProductCreated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6230),
                             ProductName = "Cool Breeze",
-                            ProductUpdated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7675)
+                            ProductUpdated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6230)
                         },
                         new
                         {
-                            ProductId = new Guid("b69b0f72-5162-4e38-867b-25c123b9f939"),
+                            ProductId = new Guid("a532e0ec-73ee-43f3-9dd2-b8a1d5ed470c"),
                             ProductBasePrice = 99999m,
                             ProductCategory = "Laptop",
-                            ProductCreated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7676),
+                            ProductCreated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6232),
                             ProductName = "T14",
-                            ProductUpdated = new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7677)
+                            ProductUpdated = new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6233)
                         });
                 });
 

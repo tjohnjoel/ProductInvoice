@@ -43,13 +43,14 @@ namespace ProductInvoice.Controllers
                 HttpContext.Session.SetString("InvoiceId", "null");
 
             if(HttpContext.Session.GetString("InvoiceId").Equals("null") == true)
-                {
-                    //invoiceId = Guid.NewGuid();
-                    HttpContext.Session.SetString("InvoiceId",Guid.NewGuid().ToString());
+            {
+                HttpContext.Session.SetString("InvoiceId",Guid.NewGuid().ToString());
                 i = new Guid(HttpContext.Session.GetString("InvoiceId"));
-                    HttpContext.Session.SetString("TotalPrice","0");
-                    _invoiceRepository.AddInvoice(i);
-                }
+                
+                HttpContext.Session.SetString("TotalPrice","0");
+            
+                _invoiceRepository.AddInvoice(i);
+            }
             i = new Guid(HttpContext.Session.GetString("InvoiceId"));
 
             ViewBag.InvoiceId = i.ToString();
@@ -70,6 +71,7 @@ namespace ProductInvoice.Controllers
             
            decimal total = _invoiceRepository.UpdatePrice(product, InvoiceId);
              HttpContext.Session.SetString("TotalPrice", total.ToString());
+
             return RedirectToAction("AddInvoice");
         }
         [HttpPost]
@@ -78,9 +80,11 @@ namespace ProductInvoice.Controllers
             Product product = _productRepository.GetProductById(productId);
 
             Guid InvoiceId = new Guid(HttpContext.Session.GetString("InvoiceId"));
-            _invoiceItemsRepository.RemoveItems(InvoiceId, product);
+
 
             decimal total = _invoiceRepository.SubtractPrice(product, InvoiceId);
+            _invoiceItemsRepository.RemoveItems(InvoiceId, product);
+
             HttpContext.Session.SetString("TotalPrice", total.ToString());
 
             return RedirectToAction("AddInvoice");

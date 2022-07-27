@@ -68,7 +68,7 @@ namespace ProductInvoice.Services
             && i.InvoiceId == invoiceId).FirstOrDefault();
             if (invoiceItems == null)
             {
-                return 0;
+                return invoice.TotalPrice;
             }
             if (discount != null)
             {

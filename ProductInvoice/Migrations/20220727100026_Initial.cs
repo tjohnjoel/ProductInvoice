@@ -46,7 +46,7 @@ namespace ProductInvoice.Migrations
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DiscountPercent = table.Column<int>(type: "int", nullable: false),
                     DiscountCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DiscountExpiration = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DiscountExpiration = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,11 +91,11 @@ namespace ProductInvoice.Migrations
                 columns: new[] { "ProductId", "ProductBasePrice", "ProductCategory", "ProductCreated", "ProductName", "ProductUpdated" },
                 values: new object[,]
                 {
-                    { new Guid("333ae2c4-50c2-4f44-8499-35e06bce0c7e"), 49999m, "Television", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7671), "Stans Pro", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7671) },
-                    { new Guid("75373a09-95d7-4e03-b489-7f99a81ed3b8"), 9999m, "Mobiles", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7659), "Novice", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7669) },
-                    { new Guid("b69b0f72-5162-4e38-867b-25c123b9f939"), 99999m, "Laptop", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7676), "T14", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7677) },
-                    { new Guid("c28a8af3-b1a2-4d87-83fd-64c36153d0bd"), 19999m, "Washing Machine", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7673), "Ultra Washing", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7673) },
-                    { new Guid("e1ac9917-d9fe-4aea-a43e-5680580665da"), 59999m, "Air Conditioner", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7674), "Cool Breeze", new DateTime(2022, 7, 21, 15, 16, 46, 114, DateTimeKind.Local).AddTicks(7675) }
+                    { new Guid("352e8789-e944-496c-8d6d-67da0b3fc2be"), 9999m, "Mobiles", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6175), "Novice", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6191) },
+                    { new Guid("53249ff4-b284-4202-843a-e3cb05688923"), 49999m, "Television", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6196), "Stans Pro", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6196) },
+                    { new Guid("6c5c6945-6376-4e38-be16-80ff85341ffa"), 59999m, "Air Conditioner", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6230), "Cool Breeze", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6230) },
+                    { new Guid("a532e0ec-73ee-43f3-9dd2-b8a1d5ed470c"), 99999m, "Laptop", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6232), "T14", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6233) },
+                    { new Guid("dcfe7f16-1125-4805-b756-7b7114cc6cf6"), 19999m, "Washing Machine", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6227), "Ultra Washing", new DateTime(2022, 7, 27, 15, 30, 25, 889, DateTimeKind.Local).AddTicks(6228) }
                 });
 
             migrationBuilder.CreateIndex(
