@@ -10,13 +10,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="UpdateProduct">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ProductId" />
+        <form asp-action="UpdateProduct" onsubmit=" return Validate();">
+            
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            *@<input type="hidden" asp-for="ProductId" />
             <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
+                <label asp-for="ProductName" class="control-label" ></label>
+                <input asp-for="ProductName" class="form-control" id="ProductName"/>
+                   @Html.ValidationMessageFor(x => x.ProductName, "Please enter a Name", new { @class = "text-danger", style ="display:none" })
             </div>
             <div class="form-group">
                 <label asp-for="ProductCategory" class="control-label"></label>
@@ -27,7 +28,7 @@
             <div class="form-group">
                 <label asp-for="ProductBasePrice" class="control-label"></label>
                 <input asp-for="ProductBasePrice" class="form-control" />
-                <span asp-validation-for="ProductBasePrice" class="text-danger"></span>
+                @Html.ValidationMessageFor(x => x.ProductBasePrice, "Please enter a Price", new { @class = "text-danger", style ="display:none" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -40,6 +41,22 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
+<script type="text/javascript">
+
+function Validate() {
+    event = event || window.event || event.srcElement;
+    var return_val = true;
+    if ($('#ProductName').val() == '') {
+        $('#ProductName').next('span').show();
+        return false;
+    }
+    if ($('#ProductBasePrice').val() == '') {
+        $('#ProductBasePrice').next('span').show();
+        return false;
+    }
+    return true;
 }
+</script>

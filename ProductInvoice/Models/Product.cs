@@ -7,13 +7,13 @@ namespace ProductInvoice.Models
     public class Product
     {
         public Guid ProductId { get; set; }
-        [Required]
+        
         [DisplayName("Product Name")]
         public string ProductName { get; set; }
-        [Required]
+       
         [DisplayName("Product Category")]
         public string ProductCategory { get; set; }
-        [Required]
+        
         [DisplayName("Product Base Price")]
         public decimal ProductBasePrice { get; set; }
         [DisplayName("Created Date")]
