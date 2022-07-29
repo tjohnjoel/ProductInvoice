@@ -43,10 +43,22 @@ namespace ProductInvoice.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        [ValidateAntiForgeryToken]
+        public IActionResult AddProduct([Bind("ProductId,ProductName,ProductCategory,ProductBasePrice,ProductCreated,ProductUpdated")] Product product)
         {
-            _productRepository.AddProduct(product);
-            return RedirectToAction("Index");
+            product.ProductId = Guid.NewGuid();
+            product.ProductCreated = DateTime.Now;
+            product.ProductUpdated = DateTime.Now;
+            
+            if (product.ProductName != null && product.ProductBasePrice!=null)
+            {
+                _productRepository.AddProduct(product);
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "Index", _productRepository.products().ToList()) });
+            }
+            else
+            {
+                return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddProduct", product) });
+            }
         }
 
         [HttpGet]

@@ -14,10 +14,7 @@ namespace ProductInvoice.Services
 
         public void AddProduct(Product product)
         {
-            product.ProductId = Guid.NewGuid();
-            product.ProductCreated = DateTime.Now;
-            product.ProductUpdated = DateTime.Now;
-
+            
             _context.Products.Add(product);
             _context.SaveChanges();
         }
