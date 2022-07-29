@@ -25,6 +25,7 @@ namespace ProductInvoice
                 viewResult.View.RenderAsync(viewContext);
                 return sw.GetStringBuilder().ToString();
             }
+            
         }
     }
 }

@@ -32,7 +32,7 @@ ajaxPost = form => {
                 $('#form-modal').modal('hide');
             }
             else {
-                $('#form-modal .modal-body').html(res.html);
+                return false;
             }
         },
         error: function (err) {

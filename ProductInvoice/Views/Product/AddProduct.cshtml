@@ -4,15 +4,15 @@
     ViewData["Title"] = "AddProduct";
     Layout = null;
 }
-<form asp-action="AddProduct" onsubmit="return ajaxPost(this);" autocomplete="on">
-    
+<form asp-action="AddProduct" onsubmit=" return Validate(this);" autocomplete="on">
+    @Html.ValidationSummary()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
     <div class="col-md-6">
        <div class="form-group">
                 <label asp-for="ProductName" class="control-label"></label>
                 <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
+                   @Html.ValidationMessageFor(x => x.ProductName, "Please enter a Name", new { @class = "text-danger", style ="display:none" })
             </div>
             </div>
             <div class="col-md-6">
@@ -27,8 +27,8 @@
             <div class="form-group">
                 <label asp-for="ProductBasePrice" class="control-label"></label>
                 <input asp-for="ProductBasePrice" class="form-control" />
-                <span asp-validation-for="ProductBasePrice" class="text-danger"></span>
-            </div>
+               @Html.ValidationMessageFor(x => x.ProductBasePrice, "Please enter a Price", new { @class = "text-danger", style ="display:none" })
+             </div>
             </div>
             <br />
             <div class="col-md-2 offset-5">
@@ -43,3 +43,24 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script type="text/javascript">
+$(document).ready(function() {
+    Validate();
+})
+function Validate(thi) {
+    event = event || window.event || event.srcElement;
+    var return_val = true;
+    if ($('#ProductName').val() == '') {
+        $('#ProductName').next('span').show();
+        return_val=false;
+    }
+    if ($('#ProductBasePrice').val() == '') {
+        $('#ProductBasePrice').next('span').show();
+        return false;
+    }
+    if (return_val == false) {
+        alert("Please Insert Values");
+    }
+    return ajaxPost(thi);
+}
+</script>
