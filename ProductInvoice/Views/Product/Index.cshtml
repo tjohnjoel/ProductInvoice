@@ -6,90 +6,22 @@
 }
 
 @Html.AntiForgeryToken()
-<div id="id">
-<h1>Index</h1>
+
 <div class="row">
     <div class="col-md-2" >
     <button onclick="AddProductFunc('@Url.Action("AddProduct","Product",null,Context.Request.Scheme)','New Product')" 
-        class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add Product</button>
+        class="btn  btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add Product</button>
     </div>
-<div class="col-md-2 offset-8">
-    <a asp-controller="Discount" asp-action="AddDiscount" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-circle-plus"></i>
+<div class="col-md-3 offset-7">
+    <a asp-controller="Discount" asp-action="AddDiscount" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus"></i>
          Add a New Discount</a>
     </div>
 </div>
 <br />
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.discounts)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductBasePrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductUpdated)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                
-                    @foreach(var ite in item.discounts)
-                    {
-                        @Html.DisplayFor(modelItem => ite.DiscountPercent)
-                        <text>% </text>
-                    }
-                  
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductBasePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductUpdated)
-            </td>
-            <td>
-                <form asp-action="DeleteProduct" asp-route-ProductId="@item.ProductId">
-                <div class="btn-group btn-group-sm">      
-                    <a asp-action="UpdateProduct" asp-route-ProductId="@item.ProductId" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></a>
-                
-                <a asp-action="GetProductById" asp-route-ProductId="@item.ProductId"
-                class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a>
-                
-                    <button type="submit" class="btn btn-danger"
-                    onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash"></i>
-                    </button>
-                    
-                    </div>
-                    </form>
 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</div>
+<div class="row">
+        @foreach(var item in Model)
+        {
+            @Html.Partial("_ProductCard",item)
+        }
 </div>
