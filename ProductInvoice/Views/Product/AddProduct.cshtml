@@ -26,7 +26,7 @@
             <div class="row">
             <div class="form-group">
                 <label asp-for="ProductBasePrice" class="control-label"></label>
-                <input asp-for="ProductBasePrice" class="form-control" />
+                <input type="number" asp-for="ProductBasePrice" class="form-control" />
                @Html.ValidationMessageFor(x => x.ProductBasePrice, "Please enter a Price", new { @class = "text-danger", style ="display:none" })
              </div>
             </div>
@@ -47,20 +47,23 @@
 $(document).ready(function() {
     Validate();
 })
-function Validate(thi) {
+function Validate() {
     event = event || window.event || event.srcElement;
     var return_val = true;
     if ($('#ProductName').val() == '') {
         $('#ProductName').next('span').show();
-        return_val=false;
+        return_val= false;
+    }
+    else{
+        $('#ProductName').next('span').hide();
     }
     if ($('#ProductBasePrice').val() == '') {
         $('#ProductBasePrice').next('span').show();
-        return false;
+        return_val = false;
     }
-    if (return_val == false) {
-        alert("Please Insert Values");
+    else {
+        $('#ProductBasePrice').next('span').hide();
     }
-    return ajaxPost(thi);
+    return return_val;
 }
 </script>

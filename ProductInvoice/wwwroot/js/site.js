@@ -7,12 +7,12 @@
 AddProductFunc = (url,title)=> {
     $.ajax({
         url: url,
-    type: "GET",
+        type: "GET",
         success: function (res) {
             $('#form-modal .modal-body').html(res);
             $('#form-modal .modal-title').html(title);
             $('#form-modal').modal('show');
-    }
+        }
     });
 }
 
